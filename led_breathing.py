@@ -33,15 +33,15 @@ try:
     pwm = generate_pwm_signal()
     while True:
         # Increase duty cycle: 0~100 by 4 each step
-        for dc in range(0, 100, 4):
+        for dc in range(0, 101, 5):
             pwm.ChangeDutyCycle(dc)
             time.sleep(0.05)
-        time.sleep(1)
+        time.sleep(0.5)
         # Increase duty cycle: 100~0 by -4 each step
-        for dc in range(100, 0, -4):
+        for dc in range(100, -1, -5):
             pwm.ChangeDutyCycle(dc)
             time.sleep(0.05)
-        time.sleep(1)
+        time.sleep(0.5)
 except KeyboardInterrupt:
     pwm.stop()
     GPIO.output(LED_PIN, GPIO.LOW)
