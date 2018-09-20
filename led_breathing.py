@@ -6,9 +6,10 @@ LED_PIN = 7
 # Pin layout (BOARD/BCM)
 GPIO.setmode(GPIO.BOARD)
 
-#Initialize
+# Initialize
 GPIO.setup(LED_PIN, GPIO.OUT)
 GPIO.output(LED_PIN, GPIO.LOW)
+
 
 def generate_pwm_signal():
     """
@@ -25,7 +26,8 @@ def generate_pwm_signal():
 
     pwm = GPIO.PWM(LED_PIN, 1000)
     pwm.start(0)
-    return pwm;
+    return pwm
+
 
 try:
     pwm = generate_pwm_signal()
