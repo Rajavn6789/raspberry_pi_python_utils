@@ -6,22 +6,22 @@ GPIO.setmode(GPIO.BOARD)
 
 # Set GPIO Pins
 BUZZER_PIN = 7
-PIN_TRIGGER = 11
-PIN_ECHO = 12
+TRIGGER_PIN = 11
+ECHO_PIN = 12
 
 # Set GPIO direction (IN / OUT)
 GPIO.setup(BUZZER_PIN, GPIO.OUT)
-GPIO.setup(PIN_TRIGGER, GPIO.OUT)
-GPIO.setup(PIN_ECHO, GPIO.IN)
+GPIO.setup(TRIGGER_PIN, GPIO.OUT)
+GPIO.setup(ECHO_PIN, GPIO.IN)
 
 # Initialize Pins
 GPIO.output(BUZZER_PIN, GPIO.LOW)
-GPIO.output(PIN_TRIGGER, GPIO.LOW)
+GPIO.output(TRIGGER_PIN, GPIO.LOW)
 
 
 def warn_buzzer():
     "Actvates buzzer by setting BUZZER_PIN on and off"
-    
+
     GPIO.output(BUZZER_PIN, True)
     time.sleep(0.3)
     GPIO.output(BUZZER_PIN, False)
@@ -41,16 +41,16 @@ def calculate_distance():
     """
 
     # Shoot Ultrasonic signal
-    GPIO.output(PIN_TRIGGER, GPIO.HIGH)
+    GPIO.output(TRIGGER_PIN, GPIO.HIGH)
     time.sleep(0.00001)
-    GPIO.output(PIN_TRIGGER, GPIO.LOW)
+    GPIO.output(TRIGGER_PIN, GPIO.LOW)
 
     # Calculate Time
     startTime = 0
     endTime = 0
-    while GPIO.input(PIN_ECHO) == 0:
+    while GPIO.input(ECHO_PIN) == 0:
         startTime = time.time()
-    while GPIO.input(PIN_ECHO) == 1:
+    while GPIO.input(ECHO_PIN) == 1:
         endTime = time.time()
 
     # Calculate Distance
