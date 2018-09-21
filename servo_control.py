@@ -1,29 +1,37 @@
 import RPi.GPIO as GPIO
 import time
 
-# use board layout for pin numbers
+SIGNAL_PIN = 7
+
+# Pin layout (BOARD/BCM)
 GPIO.setmode(GPIO.BOARD)
 
-# set output pins
-GPIO.setup(7, GPIO.OUT)
+# Initialize
+GPIO.setup(SIGNAL_PIN, GPIO.OUT)
+GPIO.setup(SIGNAL_PIN, GPIO.LOW)
 
-# setup PWM
-p = GPIO.PWM(7, 50)
 
-# start PWM
-p.start(7.5)
+def generate_pwm_signal():
+    """
+    Generate a 50hz or 20ms pulse
+    """
+    pwm = GPIO.PWM(SIGNAL_PIN, 50)
+    pwm.start(7.5)
+    return pwm
+
 
 try:
     while True:
-        # neutral
-        p.ChangeDutyCycle(7.5)
-        time.sleep(3)
+        pwm = generate_pwm_signal()
+        # 0 degree
+        pwm.ChangeDutyCycle(7.5)
+        time.sleep(2)
         # -90 degree
-        p.ChangeDutyCycle(2.5)
-        time.sleep(3)
+        pwm.ChangeDutyCycle(2.5)
+        time.sleep(2)
         # +90 degree
-        p.ChangeDutyCycle(12.5)
-        time.sleep(3)
+        pwm.ChangeDutyCycle(12.5)
+        time.sleep(2)
 except KeyboardInterrupt:
-        p.stop()
+        pwm.stop()
         GPIO.cleanup()
