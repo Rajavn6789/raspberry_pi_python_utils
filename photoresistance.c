@@ -1,6 +1,11 @@
 /*
 * Compiling: gcc -Wall -o photoresistance photoresistance.c -lwiringPi
 * Run: sudo ./photoresistance
+* NOTE
+* A2D Conversion
+* 1) Sampling rate should be 10 times than the frequency of the signal
+* 2) 8bit A2D - (value * 5V)/2**8 = (value * 5000)/255
+* 3) More the bits more the accuracy is.
 */
 #include <wiringPi.h>
 #include <pcf8591.h>
